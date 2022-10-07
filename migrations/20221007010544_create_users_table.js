@@ -2,11 +2,13 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+
+// Buat skema database login user
 exports.up = function (knex) {
-  return knex.scheme.createTable("posts", function (table) {
+  return knex.schema.createTable("users", function (table) {
     table.increments();
-    table.string("tittle");
-    table.text("content");
+    table.string("email");
+    table.string("password");
     table.timestamp(true, true);
   });
 };
@@ -16,5 +18,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable("posts");
+  return knex.schema.dropTable("users");
 };
