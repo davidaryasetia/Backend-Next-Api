@@ -9,7 +9,7 @@ Jika data yang dikirim dalam bentuk application/json
 maka data yang dikirim berbentuk string & string ndak bisa
 di read
 */
-  const { email, password } = JSON.parse(req.body);
+  const { email, password } = req.body;
   //   test request body
   //   console.log({ email, password });
 

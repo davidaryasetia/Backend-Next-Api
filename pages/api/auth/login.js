@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end;
 
-  const { email, password } = JSON.parse(req.body);
+  const { email, password } = req.body;
 
   const checkUser = await db("users").where({ email }).first();
   //   Check User jika datanya tidak ada
