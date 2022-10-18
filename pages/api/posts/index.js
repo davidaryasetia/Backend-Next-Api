@@ -6,8 +6,6 @@ export default async function handler(req, res) {
   if (req.method !== "GET") return res.status(405).end();
 
   //   Karena promise akan menjadi asynchronus
-  const auth = await authorization(req, res);
-  console.log(auth);
 
   const posts = await db("posts");
   //   console.log(posts);
