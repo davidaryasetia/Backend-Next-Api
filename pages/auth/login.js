@@ -63,14 +63,14 @@ export default function Login() {
           onChange={fieldHandler.bind(this)}
           type="text"
           name="email"
-          placeholder="Email"
+          placeholder="Masukkan Email"
         />
         <br />
         <input
           onChange={fieldHandler.bind(this)}
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Masukkan Password"
         />
         <br />
         <button type="submit">Login</button>
