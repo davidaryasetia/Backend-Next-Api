@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Cookie from "js-cookie";
+import Router from "next/router";
+import cookies from "next-cookies";
 import { unauthPages } from "../../middlewares/authorizationPage";
 
 export async function getServerSideProps(ctx) {
   await unauthPages(ctx);
-
   return { props: {} };
 }
 
-export default function Register() {
+export default function Login() {
   const [fields, setFields] = useState({
     email: "",
     password: "",
@@ -15,29 +17,38 @@ export default function Register() {
 
   const [status, setStatus] = useState("normal");
 
-  async function registerHandler(e) {
+  async function loginHandler(e) {
     e.preventDefault();
 
     setStatus("loading");
 
-    const registerReq = await fetch("/api/auth/register", {
+    /*
+    Melakukan Pemanggilan API Fetch
+    Menggunakan relative url path, di API Browser dia support relative browser 
+    
+    */
+    const loginReq = await fetch("/api/auth/login", {
       method: "POST",
-      body: JSON.stringify(fields),
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(fields),
     });
 
-    if (!registerReq.ok) return setStatus("error" + registerReq.status);
+    if (!loginReq.ok) return setStatus("error" + loginReq.status);
 
-    const registerRes = await registerReq.json();
+    const loginRes = await loginReq.json();
 
     setStatus("success");
-    // console.log(registerRes);
+
+    Cookie.set("token", loginRes.token);
+
+    Router.push("/posts");
   }
 
   function fieldHandler(e) {
     const name = e.target.getAttribute("name");
+
     setFields({
       ...fields,
       [name]: e.target.value,
@@ -46,26 +57,25 @@ export default function Register() {
 
   return (
     <div>
-      <h1>Register</h1>
-      <form onSubmit={registerHandler.bind(this)}>
+      <h1>Login</h1>
+      <form onSubmit={loginHandler.bind(this)}>
         <input
-          name="email"
           onChange={fieldHandler.bind(this)}
           type="text"
-          placeholder="email"
+          name="email"
+          placeholder="Email"
         />
         <br />
         <input
-          name="password"
           onChange={fieldHandler.bind(this)}
           type="password"
-          placeholder="password"
+          name="password"
+          placeholder="Password"
         />
         <br />
-        <button type="submit">Register</button>
-
-        <div>Output : {status}</div>
+        <button type="submit">Login</button>
       </form>
+      <div>Output : {status}</div>
     </div>
   );
 }

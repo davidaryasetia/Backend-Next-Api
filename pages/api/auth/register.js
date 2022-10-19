@@ -24,7 +24,7 @@ di read
   const registeredUser = await db("users").where({ id: register }).first();
 
   //   test message registered user
-  console.log(registeredUser);
+  // console.log(registeredUser);
   res.status(200);
   res.json({
     message: "Message register Sucsessfully",
