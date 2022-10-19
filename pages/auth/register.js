@@ -52,14 +52,14 @@ export default function Register() {
           name="email"
           onChange={fieldHandler.bind(this)}
           type="text"
-          placeholder="email"
+          placeholder="Masukkan Email"
         />
         <br />
         <input
           name="password"
           onChange={fieldHandler.bind(this)}
           type="password"
-          placeholder="password"
+          placeholder="Masukkan Password"
         />
         <br />
         <button type="submit">Register</button>
