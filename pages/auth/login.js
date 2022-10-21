@@ -3,6 +3,7 @@ import Cookie from "js-cookie";
 import Router from "next/router";
 import cookies from "next-cookies";
 import { unauthPages } from "../../middlewares/authorizationPage";
+import Link from "next/link";
 
 export async function getServerSideProps(ctx) {
   await unauthPages(ctx);
@@ -76,6 +77,9 @@ export default function Login() {
         <button type="submit">Login</button>
       </form>
       <div>Output : {status}</div>
+      <Link href="/auth/register">
+        <a>Register</a>
+      </Link>
     </div>
   );
 }

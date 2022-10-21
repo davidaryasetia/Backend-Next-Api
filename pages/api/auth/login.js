@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       id: checkUser.id,
       email: checkUser.email,
     },
-    "nonamanis",
+    process.env.JWT_SECRET,
     {
       expiresIn: "2 days",
     }

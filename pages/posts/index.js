@@ -6,9 +6,10 @@ import Nav from "../../components/Nav";
 export async function getServerSideProps(ctx) {
   const { token } = await authPage(ctx);
 
-  const postReq = await fetch("http://localhost:3000/api/posts", {
+  const postReq = await fetch("http://localhost:3000/api/posts/", {
+    method: "GET",
     headers: {
-      Authorization: "Bearer" + token,
+      Authorization: "Bearer " + token,
     },
   });
 

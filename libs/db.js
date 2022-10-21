@@ -1,11 +1,12 @@
 const knex = require("knex")({
-  client: "mysql",
+  // Kita akan load variabelnya dari env
+  client: process.env.DB_CLIENT,
   connection: {
-    host: "127.0.0.1",
+    host: process.env.DB_HOST,
     port: 3306,
-    user: "root",
-    password: "",
-    database: "next-api",
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
   },
 });
 

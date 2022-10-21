@@ -16,11 +16,15 @@ export default function authorization(req, res) {
     //   Jika dia auth type nya bukan bearer dia tetap authorize
     if (authType !== "Bearer") return res.status(401).end();
 
-    return jwt.verify(authtoken, "nonamanis", function (err, decoded) {
-      {
-        if (err) return res.status(401).end();
-        return resolve(decoded);
+    return jwt.verify(
+      authtoken,
+      process.env.JWT_SECRET,
+      function (err, decoded) {
+        {
+          if (err) return res.status(401).end();
+          return resolve(decoded);
+        }
       }
-    });
+    );
   });
 }

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { unauthPages } from "../../middlewares/authorizationPage";
+import Router from "next/router";
+import Link from "next/link";
 
 export async function getServerSideProps(ctx) {
   await unauthPages(ctx);
@@ -33,6 +35,8 @@ export default function Register() {
     const registerRes = await registerReq.json();
 
     setStatus("success");
+
+    Router.push("./login");
     // console.log(registerRes);
   }
 
@@ -66,6 +70,10 @@ export default function Register() {
 
         <div>Output : {status}</div>
       </form>
+
+      <Link href="/auth/login">
+        <a>Login</a>
+      </Link>
     </div>
   );
 }
